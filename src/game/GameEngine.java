@@ -8,27 +8,33 @@ public class GameEngine {
     private URL url = null;
     private int solution = -1;
 
-    private void generateRound() throws MalformedURLException {
+    public void generateGame() throws MalformedURLException {
         int randomGame =  new Random().nextInt(1000);
         url = new URL("https://sanfoh.com/heartgame/sixeqgame_" + randomGame + ".png");
         solution  = randomGame % 10;
     }
 
-    public int checkGameResults() {
+    public int checkGameResults(int givenAnswer, boolean cancelled) {
         // -1 -> Other (game cancelled -> lost)
         //  0 -> Game Lost
         //  1 -> Game Won
-        int gameRes = 0;
+        int gameRes = -1;
+
+        if (cancelled == false) {
+            if (givenAnswer == solution) {
+                gameRes = 1;
+            } else {
+                gameRes = 0;
+            }
+        } else {
+            gameRes = -1;
+        }
 
         return gameRes;
     }
 
-    public URL getCurrentRound() {
+    public URL getCurrentGame() {
         return url;
-    }
-
-    public int getRoundSolution() {
-        return solution;
     }
 
 }
