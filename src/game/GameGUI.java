@@ -20,8 +20,6 @@ public class GameGUI {
         player.setBounds(10, 10, 150, 20);
         header.add(player);
 
-
-
         gameWindow.setVisible(true);
     }
 }
