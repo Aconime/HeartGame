@@ -1,5 +1,5 @@
-import account.LoginGUI;
+import gui.GameMenuGUI;
 
 public class Main {
-    public static void main(String[] args) { new LoginGUI(); }
+    public static void main(String[] args) { new GameMenuGUI(5); }
 }
