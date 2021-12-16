@@ -1,7 +1,7 @@
 package gui;
 
 import game.GameEngine;
-import player.PlayerData;
+import player.PlayerGetData;
 import ui.WindowTemplate;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ public class GameGUI {
 
     public GameGUI(JFrame parent, int playerId) {
         // Create new window using the template from the UI
-        JFrame gameWindow = new WindowTemplate("HEARTGAME - Gameplay", new Dimension(700, 660)).createWindow();
+        JFrame gameWindow = new WindowTemplate("HeartGame - Gameplay", new Dimension(700, 660)).createWindow();
 
         gameWindow.addWindowListener(new WindowAdapter() {
             @Override
@@ -46,7 +46,7 @@ public class GameGUI {
         gameWindow.add(answerBtn);
 
         answerBtn.addActionListener(e -> {
-            PlayerData playerData = new PlayerData();
+            PlayerGetData playerData = new PlayerGetData();
             int experience = 4500;
             int result = gameEngine.checkGameResults(Integer.parseInt(answer.getText()), false);
             if (result == 0) {

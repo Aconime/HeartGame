@@ -1,5 +1,6 @@
 package gui;
 
+import api.GeneratorAPI;
 import lib.Authentication;
 import ui.UIButton;
 import ui.UIInputFields;
@@ -16,7 +17,7 @@ import java.io.IOException;
 public class LoginGUI {
     public LoginGUI() {
         // Create Window
-        JFrame loginWindow = new WindowTemplate("HEARTGAME - LOGIN", new Dimension(650,650)).createWindow();
+        JFrame loginWindow = new WindowTemplate("HeartGame - Login", new Dimension(650,650)).createWindow();
 
         // Add Window Background
         try {
@@ -68,9 +69,9 @@ public class LoginGUI {
                     new GameMenuGUI(loginStatus[1]);
                     loginWindow.dispose();
                 }
-                else if (loginStatus[0] == 0) System.out.println("Username or Password are NOT correct!");
-                else if (loginStatus[0] == -1) System.out.println("Fatal Error - Database Connection Failed.");
-            } else System.out.println("Error: Please enter both your username and password to login");
+                else if (loginStatus[0] == 0) JOptionPane.showMessageDialog(loginWindow, "Username or Password are NOT correct!", "LOGIN", JOptionPane.ERROR_MESSAGE);
+                else if (loginStatus[0] == -1) JOptionPane.showMessageDialog(loginWindow, "SQL Error: There was a problem with your connection. Please retry again.", "LOGIN", JOptionPane.ERROR_MESSAGE); // Fatal Error - Database Connection Failed.
+            } else JOptionPane.showMessageDialog(loginWindow, "Please enter both your username and password to login.", "LOGIN", JOptionPane.ERROR_MESSAGE);
         });
 
         // Create Account Button -> Used for opening the registration window (frame)

@@ -5,6 +5,35 @@ import lib.bcrypt.BCrypt; // External library from <GitHub Account Here>
 
 public class Authentication {
 
+    public boolean authenticateUsername(String uname) {
+        boolean unameExists = false;
+
+        // Create new database object and connect to it
+        Database db = new Database();
+        Connection dbConn = db.connect();
+
+        // If the connection failed return false
+        if (dbConn == null) {
+            unameExists = false;
+        }
+
+        try {
+            // Check if there are other rows in the table on the database with the username provided
+            String sqlQuery = "SELECT * FROM players WHERE player_uname='"+uname+"'";
+            PreparedStatement statement = dbConn.prepareStatement(sqlQuery);
+            ResultSet results = statement.executeQuery();
+
+            // If username exists in database the return true
+            if (results.next()) {
+                unameExists = true;
+            }
+        } catch (SQLException e) { }
+
+        db.disconnect(); // Disconnect from the database
+
+        return unameExists; // Return results
+    }
+
     // Authenticate login credentials from player (Used: LoginGUI)
     public int[] authenticateLogin(String uname, String pwd) {
         int[] verified = {0, 0};
@@ -79,8 +108,8 @@ public class Authentication {
                     String hashedPassword = BCrypt.hashpw(pwd, BCrypt.gensalt(10));
 
                     // Insert the data provided by the user into the database
-                    String sqlRegisterQuery = "INSERT INTO players (player_uname, player_pwd, player_email, player_xp, player_wins, player_losses, player_gp, player_rank, player_coins)"+
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    String sqlRegisterQuery = "INSERT INTO players (player_uname, player_pwd, player_email, player_xp, player_wins, player_losses, player_gp)"+
+                            "VALUES (?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement registerStatement = dbConn.prepareStatement(sqlRegisterQuery);
                     // Pass all the required parameters from the SQL Query
                     registerStatement.setString(1, uname);
@@ -90,8 +119,6 @@ public class Authentication {
                     registerStatement.setInt(5, 0);
                     registerStatement.setInt(6, 0);
                     registerStatement.setInt(7, 0);
-                    registerStatement.setInt(8, 0);
-                    registerStatement.setInt(9, 100);
                     int registerResults = registerStatement.executeUpdate(); // Execute the statement
 
                     // If execution was successful assign value '1' if not assign value '0' to the 'verified' variable.

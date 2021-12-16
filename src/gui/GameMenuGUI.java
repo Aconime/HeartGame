@@ -1,6 +1,6 @@
 package gui;
 
-import player.PlayerData;
+import player.PlayerGetData;
 import ui.UIButton;
 import ui.WindowTemplate;
 
@@ -10,10 +10,10 @@ import java.awt.*;
 public class GameMenuGUI {
     public GameMenuGUI(int playerId) {
         // Create instance of GameData
-        PlayerData playerData = new PlayerData();
+        PlayerGetData playerData = new PlayerGetData();
 
         // Create new window using the template from the UI
-        JFrame menuWindow = new WindowTemplate("HEARTGAME - Game Menu", new Dimension(650, 650)).createWindow();
+        JFrame menuWindow = new WindowTemplate("HeartGame - Game Menu", new Dimension(650, 650)).createWindow();
 
         // Header of application
         JPanel header = new JPanel();
@@ -23,15 +23,15 @@ public class GameMenuGUI {
         menuWindow.add(header);
 
         // Username display
-        JLabel player = new JLabel(playerData.getPlayerUsername(playerId).toUpperCase());
+        JLabel player = new JLabel("WELCOME, " + playerData.getPlayerUsername(playerId).toUpperCase());
         player.setFont(new Font("Segoe UI", 0, 18));
-        player.setBounds(10, 8, 150, 20);
+        player.setBounds(10, 8, 350, 20);
         header.add(player);
 
         // Display user rank under username
-        JLabel playerRank = new JLabel(playerData.getPlayerRankName(playerId).toUpperCase());
+        JLabel playerRank = new JLabel(playerData.getPlayerRank(playerId).toUpperCase() + " - " + playerData.getPlayerXP(playerId) + " / " + playerData.getPlayerXPMax(playerId));
         playerRank.setFont(new Font("Segoe UI", 0, 11));
-        playerRank.setBounds(11, 34, 200, 20);
+        playerRank.setBounds(11, 34, 300, 20);
         header.add(playerRank);
 
         // Option Menu Wrapper Panel
@@ -52,17 +52,18 @@ public class GameMenuGUI {
             new GameGUI(menuWindow, playerId);
         });
 
-        JButton profileButton = new UIButton().uiFilledButton("PLAYER PROFILE");
+        JButton profileButton = new UIButton().uiFilledButton("MY PROFILE");
         profileButton.setBounds(10, 65, 365, 45);
         optionWrapper.add(profileButton);
 
-        JButton leaderboardButton = new UIButton().uiFilledButton("LEADERBOARD");
-        leaderboardButton.setBounds(10, 120, 365, 45);
-        optionWrapper.add(leaderboardButton);
+        profileButton.addActionListener(e -> {
+            new ProfileGUI(menuWindow, playerId);
+            menuWindow.setEnabled(false);
+        });
 
         // Logout Option
         JButton logoutButton = new UIButton().uiFilledButton("LOGOUT");
-        logoutButton.setBounds(10, 175, 365, 45);
+        logoutButton.setBounds(10, 120, 365, 45);
         optionWrapper.add(logoutButton);
 
         // Logout Event -> Function to close menu and open LoginGUI
