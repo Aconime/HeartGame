@@ -15,7 +15,7 @@ public class PlayerGetData {
         db = new Database();
     }
 
-    private String[] getPlayerDetails(int id) {
+    private String[] getPlayerData(int id) {
         dbConn = db.connect();
 
         String[] playerDetails = new String[8];
@@ -46,15 +46,50 @@ public class PlayerGetData {
     }
 
     public String getPlayerUsername(int id) {
-        return getPlayerDetails(id)[0];
+        return getPlayerData(id)[0];
     }
 
     public String getPlayerEmail(int id) {
-        return getPlayerDetails(id)[1];
+        return getPlayerData(id)[1];
     }
 
     public int getPlayerXP(int id) {
-        return Integer.parseInt(getPlayerDetails(id)[2]);
+        return Integer.parseInt(getPlayerData(id)[2]);
+    }
+
+    public int getPlayerWins(int id) {
+        return Integer.parseInt(getPlayerData(id)[3]);
+    }
+
+    public int getPlayerLosses(int id) {
+        return Integer.parseInt(getPlayerData(id)[4]);
+    }
+
+    public int getPlayerGP(int id) {
+        return Integer.parseInt(getPlayerData(id)[5]);
+    }
+
+    public String getPlayerRank(int id) {
+        int xpValue = getPlayerXP(id);
+        String rankName = "";
+
+        if (xpValue <= 1500) {
+            rankName = "Beginner";
+        } else if (xpValue > 1500 && xpValue <= 4000) {
+            rankName = "Advanced";
+        } else if (xpValue > 4000 && xpValue <= 10000) {
+            rankName = "Professional";
+        } else if (xpValue > 10000 && xpValue <= 15000) {
+            rankName = "Legend";
+        } else if (xpValue > 15000 && xpValue <= 50000) {
+            rankName = "Genius";
+        } else if (xpValue > 50000 && xpValue <= 100000) {
+            rankName = "Undefeated";
+        } else if (xpValue > 100000) {
+            rankName = "Mastermind";
+        }
+
+        return rankName;
     }
 
     public int getPlayerXPMax(int id) {
@@ -84,41 +119,6 @@ public class PlayerGetData {
                 break;
         }
         return maxPoints;
-    }
-
-    public int getPlayerWins(int id) {
-        return Integer.parseInt(getPlayerDetails(id)[3]);
-    }
-
-    public int getPlayerLosses(int id) {
-        return Integer.parseInt(getPlayerDetails(id)[4]);
-    }
-
-    public int getPlayerGP(int id) {
-        return Integer.parseInt(getPlayerDetails(id)[5]);
-    }
-
-    public String getPlayerRank(int id) {
-        int xpValue = getPlayerXP(id);
-        String rankName = "";
-
-        if (xpValue <= 1500) {
-            rankName = "Beginner";
-        } else if (xpValue > 1500 && xpValue <= 4000) {
-            rankName = "Advanced";
-        } else if (xpValue > 4000 && xpValue <= 10000) {
-            rankName = "Professional";
-        } else if (xpValue > 10000 && xpValue <= 15000) {
-            rankName = "Legend";
-        } else if (xpValue > 15000 && xpValue <= 50000) {
-            rankName = "Genius";
-        } else if (xpValue > 50000 && xpValue <= 100000) {
-            rankName = "Undefeated";
-        } else if (xpValue > 100000) {
-            rankName = "Mastermind";
-        }
-
-        return rankName;
     }
 
 }

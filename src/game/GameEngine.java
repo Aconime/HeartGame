@@ -14,23 +14,13 @@ public class GameEngine {
         solution  = randomGame % 10;
     }
 
-    public int checkGameResults(int givenAnswer, boolean cancelled) {
-        // -1 -> Other (game cancelled -> lost)
-        //  0 -> Game Lost
-        //  1 -> Game Won
-        int gameRes = -1;
+    public boolean checkGameResults(int givenAnswer) {
+        boolean gameWon = false;
 
-        if (cancelled == false) {
-            if (givenAnswer == solution) {
-                gameRes = 1;
-            } else {
-                gameRes = 0;
-            }
-        } else {
-            gameRes = -1;
-        }
+        if (givenAnswer == solution) gameWon = true;
+        else gameWon = false;
 
-        return gameRes;
+        return gameWon;
     }
 
     public URL getCurrentGame() {

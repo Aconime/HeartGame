@@ -48,6 +48,7 @@ public class RegisterGUI {
         // Username Label and Field
         JLabel unameLbl = new UILabel().uiLabel("Choose a Username");
         unameLbl.setBounds(10, 80, 430, 30);
+        unameLbl.setHorizontalAlignment(SwingConstants.LEFT);
         regWindow.add(unameLbl);
         JTextField usernameTxt = new UIInputFields().uiTextField();
         usernameTxt.setBounds(10, 110, 415, 42);
@@ -84,6 +85,7 @@ public class RegisterGUI {
 
         // Email Address Label and Field
         JLabel emailLbl = new UILabel().uiLabel("Enter your E-mail Address");
+        emailLbl.setHorizontalAlignment(SwingConstants.LEFT);
         emailLbl.setBounds(10, 182, 430, 30);
         regWindow.add(emailLbl);
         JTextField emailTxt = new UIInputFields().uiTextField();
@@ -92,6 +94,7 @@ public class RegisterGUI {
 
         // Password Label and Field
         JLabel pwdLbl = new UILabel().uiLabel("Create your Password");
+        pwdLbl.setHorizontalAlignment(SwingConstants.LEFT);
         pwdLbl.setBounds(10, 266, 430, 30);
         regWindow.add(pwdLbl);
         JPasswordField pwdTxt = new UIInputFields().uiPasswordField();

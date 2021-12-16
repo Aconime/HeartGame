@@ -13,7 +13,7 @@ public class GameMenuGUI {
         PlayerGetData playerData = new PlayerGetData();
 
         // Create new window using the template from the UI
-        JFrame menuWindow = new WindowTemplate("HeartGame - Game Menu", new Dimension(650, 650)).createWindow();
+        JFrame menuWindow = new WindowTemplate("HeartGame - Game Menu", new Dimension(520, 450)).createWindow();
 
         // Header of application
         JPanel header = new JPanel();
@@ -38,7 +38,7 @@ public class GameMenuGUI {
         JPanel optionWrapper = new JPanel();
         optionWrapper.setLayout(null);
         optionWrapper.setBackground(Color.white);
-        optionWrapper.setBounds(140, 120, 385, 240);
+        optionWrapper.setBounds(66, 120, 385, 240);
         menuWindow.add(optionWrapper);
 
         // Play New Game Option
