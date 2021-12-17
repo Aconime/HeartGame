@@ -1,7 +1,3 @@
-# HEART GAME POINTS
-
-
-
 # Ranks & Experience
 
 ### About Ranks & Experience
